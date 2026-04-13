@@ -1,158 +1,158 @@
-# jarvis Rule
+# jarvis 规则
 
-## 1. Purpose
+## 1. 目的
 
-This document defines the stable rules of the `jarvis` personal assistant system.
+本文档定义 `jarvis` 个人助理系统的稳定规则。
 
-Its purpose is to keep the system:
+它的目标是让系统保持：
 
-- clear
-- consistent
-- easy to extend
-- easy to migrate
-- independent from any single AI model, framework, or vendor
+- 清晰
+- 一致
+- 易于扩展
+- 易于迁移
+- 不依赖任何单一 AI 模型、框架或厂商
 
-This file is a constraint layer, not a feature list.
-
----
-
-## 2. Core Definition
-
-`jarvis` is a personal Agent OS centered on one user.
-
-It manages:
-
-- life
-- investing
-- general intelligence gathering
-- AI research
-- knowledge organization
-- coding and tool building
-- content creation
-
-It may later expand to:
-
-- relationship and collaboration management
+本文是约束层，不是功能清单。
 
 ---
 
-## 3. System Invariants
+## 2. 核心定义
 
-The following rules should remain true even if the model, framework, UI, or tool stack changes.
+`jarvis` 是一个以单一用户为中心的个人 Agent OS。
 
-### 3.1 Single Entry
+它管理：
 
-All important tasks should enter through `jarvis`.
+- 生活
+- 投资
+- 通用情报获取
+- AI 研究
+- 知识组织
+- 编码与工具构建
+- 内容创作
 
-Reason:
+后续也可以扩展到：
 
-- unified context
-- unified memory
-- unified audit trail
-
-### 3.2 One Core, Multiple Domain Agents
-
-`jarvis Core` is the orchestrator.
-
-Domain Agents are specialists.
-
-The core routes work. Specialists do not replace the core.
-
-### 3.3 One Task, One Owner
-
-Every task must have exactly one `primary agent`.
-
-Other agents may assist, but must not compete for control of the same task.
-
-### 3.4 Research, Execution, and Archiving Must Be Separated
-
-Do not let one agent do all of the following at the same time:
-
-- gather information
-- make strategic judgments
-- perform final execution
-- define final archival structure
-
-These should remain separate responsibilities.
-
-### 3.5 Knowledge Is the Final Sink
-
-Any output worth keeping must eventually be normalized and archived by the `Knowledge Agent` or a knowledge workflow.
-
-### 3.6 Files Are the Long-Term Source of Truth
-
-Important data must not live only inside:
-
-- chat history
-- hidden memory stores
-- vector databases
-- vendor-specific backends
-
-Important outputs must be stored as files in a stable workspace.
-
-### 3.7 High-Risk Actions Require Final Confirmation
-
-The following actions must not run silently:
-
-- publish
-- delete
-- send externally
-- trade
-- change critical configuration
-
-These require explicit approval or a clearly defined permission rule.
+- 关系与协作管理
 
 ---
 
-## 4. Stable Architecture
+## 3. 系统不变量
 
-The system should always be understood as four layers:
+无论模型、框架、UI 或工具栈如何变化，以下规则都应保持成立。
 
-### 4.1 Core Layer
+### 3.1 单一入口
 
-Responsible for:
+所有重要任务都应通过 `jarvis` 进入。
 
-- user identity
-- preferences
-- memory coordination
-- routing
-- workflow coordination
-- permission control
-- audit
+原因：
 
-### 4.2 Agent Layer
+- 统一上下文
+- 统一记忆
+- 统一审计轨迹
 
-Responsible for domain-specific reasoning and task handling.
+### 3.2 一个中枢，多个领域 Agent
 
-### 4.3 Tool and Workflow Layer
+`jarvis Core` 是总控中枢。
 
-Responsible for:
+领域 Agent 是专业执行者。
 
-- tool execution
-- automation
-- workflow steps
-- structured outputs
+中枢负责路由工作，专业 Agent 不替代中枢。
 
-### 4.4 Workspace Layer
+### 3.3 一个任务，一个主责
 
-Responsible for:
+每个任务必须且只能有一个 `primary agent`。
 
-- file storage
-- directory structure
+其他 Agent 可以协作，但不能争夺同一任务的控制权。
+
+### 3.4 研究、执行、归档必须分离
+
+不要让一个 Agent 同时完成以下所有事情：
+
+- 收集信息
+- 做战略判断
+- 执行最终动作
+- 定义最终归档结构
+
+这些职责必须分离。
+
+### 3.5 知识层是最终收口
+
+任何值得长期保留的结果，最终都必须由 `Knowledge Agent` 或知识工作流进行标准化并归档。
+
+### 3.6 文件是长期真相源
+
+重要数据不能只存在于：
+
+- 聊天记录
+- 隐藏记忆存储
+- 向量数据库
+- 厂商私有后端
+
+重要产出必须以文件形式保存在稳定工作区中。
+
+### 3.7 高风险动作必须最终确认
+
+以下动作不得静默执行：
+
+- 发布
+- 删除
+- 对外发送
+- 交易
+- 修改关键配置
+
+这些动作必须有显式确认，或受明确定义的权限规则约束。
+
+---
+
+## 4. 稳定架构
+
+系统应始终被理解为四层结构：
+
+### 4.1 Core 层
+
+负责：
+
+- 用户身份
+- 偏好
+- 记忆协调
+- 路由
+- 工作流协调
+- 权限控制
+- 审计
+
+### 4.2 Agent 层
+
+负责领域推理与任务处理。
+
+### 4.3 Tool 与 Workflow 层
+
+负责：
+
+- 工具执行
+- 自动化
+- 工作流步骤
+- 结构化输出
+
+### 4.4 Workspace 层
+
+负责：
+
+- 文件存储
+- 目录结构
 - metadata
-- indexing
-- backup
-- migration
+- 索引
+- 备份
+- 迁移
 
-If a future system keeps these four layers, the system remains portable.
+如果未来系统仍保留这四层，系统就仍然具备可迁移性。
 
 ---
 
-## 5. Canonical Agent Set
+## 5. 规范 Agent 集合
 
-### 5.1 Core Agents
+### 5.1 核心 Agent
 
-The current canonical set is:
+当前规范集合包括：
 
 - `Life Agent`
 - `Investment Agent`
@@ -162,260 +162,260 @@ The current canonical set is:
 - `Coding Agent`
 - `Content Agent`
 
-### 5.2 Optional Expansion Agent
+### 5.2 可选扩展 Agent
 
 - `Relationship and Collaboration Agent`
 
-This agent is optional and should only be enabled when external communication and collaboration become a meaningful part of the workload.
+该 Agent 是可选项，只有当对外沟通和协作成为系统的重要负载时才应启用。
 
 ---
 
-## 6. Agent Roles
+## 6. Agent 角色
 
 ### 6.1 Life Agent
 
-Owns:
+负责：
 
-- schedule
-- reminders
-- daily operations
-- personal routines
+- 日程
+- 提醒
+- 日常运营
+- 个人例行事务
 
-Does not own:
+不负责：
 
-- deep research
-- code implementation
-- investment judgment
+- 深度研究
+- 代码实现
+- 投资判断
 
 ### 6.2 Investment Agent
 
-Owns:
+负责：
 
-- watchlists
-- investment review
-- risk tracking
-- market-oriented synthesis
+- 观察列表
+- 投资复盘
+- 风险跟踪
+- 面向市场的综合判断
 
-Does not own:
+不负责：
 
-- automatic trading
-- broad web scanning as its main role
-- final external execution
+- 自动交易
+- 以全网扫描作为主要职责
+- 最终对外执行
 
 ### 6.3 General Intelligence Agent
 
-Owns:
+负责：
 
-- broad information gathering
-- feeds
-- news summaries
-- topic scanning
+- 广泛信息收集
+- 订阅流
+- 新闻摘要
+- 主题扫描
 
-Does not own:
+不负责：
 
-- deep AI-specialized research
-- final archival decisions
-- final publication
+- AI 专题深度研究
+- 最终归档决策
+- 最终发布
 
 ### 6.4 AI Research Agent
 
-Owns:
+负责：
 
-- AI models
-- AI products
-- AI papers
-- AI tools
-- AI workflows
-- AI trend judgment
+- AI 模型
+- AI 产品
+- AI 论文
+- AI 工具
+- AI 工作流
+- AI 趋势判断
 
-Does not own:
+不负责：
 
-- broad generic scanning as its final role
-- final coding implementation
-- final publication
-- final archival control
+- 以泛化扫描作为最终职责
+- 最终代码实现
+- 最终发布
+- 最终归档控制
 
 ### 6.5 Knowledge Agent
 
-Owns:
+负责：
 
-- normalization
-- tagging
-- entity structure
-- linking
-- archival consistency
+- 标准化
+- 打标签
+- 实体结构
+- 链接关系
+- 归档一致性
 
-Does not own:
+不负责：
 
-- original strategic judgment
-- direct public publishing
-- code implementation
+- 原始战略判断
+- 直接公开发布
+- 代码实现
 
 ### 6.6 Coding Agent
 
-Owns:
+负责：
 
-- scripts
-- tools
-- code changes
-- automation implementation
+- 脚本
+- 工具
+- 代码修改
+- 自动化实现
 
-Does not own:
+不负责：
 
-- final content strategy
-- long-term knowledge governance
-- investment decision authority
+- 最终内容策略
+- 长期知识治理
+- 投资决策权
 
 ### 6.7 Content Agent
 
-Owns:
+负责：
 
-- topic framing
-- outlines
-- drafts
-- rewrites
-- publication preparation
+- 选题 framing
+- 提纲
+- 草稿
+- 改写
+- 发布准备
 
-Does not own:
+不负责：
 
-- long-term archival structure
-- code implementation
-- strategic investment judgment
+- 长期归档结构
+- 代码实现
+- 战略型投资判断
 
 ### 6.8 Relationship and Collaboration Agent
 
-Owns:
+负责：
 
-- contacts
-- communication context
-- meeting follow-up
-- collaboration tracking
-- relationship memory
+- 联系人
+- 沟通上下文
+- 会后跟进
+- 协作跟踪
+- 关系记忆
 
-Does not own:
+不负责：
 
-- daily life operations
-- investment judgment
-- direct sensitive sending without confirmation
+- 日常生活运营
+- 投资判断
+- 未经确认的敏感外发
 
 ---
 
-## 7. Agent Layering
+## 7. Agent 分层
 
-To avoid overlap, agents should be grouped into stable layers.
+为了避免职责重叠，Agent 应被划分为稳定层级。
 
-### 7.1 Execution Layer
+### 7.1 执行层
 
 - `Life Agent`
 - `Coding Agent`
 - `Content Agent`
 
-### 7.2 Research Layer
+### 7.2 研究层
 
 - `General Intelligence Agent`
 - `AI Research Agent`
 - `Investment Agent`
 
-### 7.3 Knowledge Layer
+### 7.3 知识层
 
 - `Knowledge Agent`
 
-### 7.4 Optional Relationship Layer
+### 7.4 可选关系层
 
 - `Relationship and Collaboration Agent`
 
-The meaning of the layers is:
+这些层级的含义是：
 
-- execution layer: what should be done now
-- research layer: what matters and why
-- knowledge layer: what should be retained
-- relationship layer: who matters and what needs follow-up
-
----
-
-## 8. Default Routing Rules
-
-### 8.1 Routing Principle
-
-For any task:
-
-1. choose the primary agent
-2. choose supporting agents
-3. choose the archive path
-4. define approval points
-
-### 8.2 Default Patterns
-
-#### Pattern A: Intelligence -> Research -> Archive
-
-Use for:
-
-- trend tracking
-- topical research
-- investment signal review
-
-Route:
-
-`General Intelligence Agent` -> `AI Research Agent` or `Investment Agent` -> `Knowledge Agent`
-
-#### Pattern B: Research -> Create -> Archive
-
-Use for:
-
-- articles
-- scripts for videos
-- public-facing analysis
-
-Route:
-
-`General Intelligence Agent` or `AI Research Agent` -> `Content Agent` -> `Knowledge Agent`
-
-#### Pattern C: Research -> Build -> Archive
-
-Use for:
-
-- tools
-- experiments
-- automations
-
-Route:
-
-`AI Research Agent` or `Knowledge Agent` -> `Coding Agent` -> `Knowledge Agent`
-
-#### Pattern D: Meeting / Contact -> Follow-Up -> Archive
-
-Use for:
-
-- meeting outcomes
-- contact management
-- collaboration progress
-
-Route:
-
-`Life Agent` or `Relationship and Collaboration Agent` -> `Relationship and Collaboration Agent` -> `Knowledge Agent`
-
-### 8.3 Conflict Resolution
-
-If more than one agent appears suitable:
-
-1. the agent closest to the final output owns the task
-2. the agent performing the high-risk action must be the final execution owner
-3. archival ownership always belongs to the `Knowledge Agent`
-4. research agents do not directly publish or externally send by default
+- 执行层：现在应该做什么
+- 研究层：什么重要，为什么重要
+- 知识层：什么值得长期保留
+- 关系层：谁重要，哪些事项需要跟进
 
 ---
 
-## 9. Workspace Rules
+## 8. 默认路由规则
 
-### 9.1 Stable Workspace
+### 8.1 路由原则
 
-All durable outputs must live in a stable workspace.
+对于任何任务：
 
-### 9.2 Domain-Based Storage
+1. 选择主责 Agent
+2. 选择协作 Agent
+3. 选择归档路径
+4. 定义审批节点
 
-Store by domain and content type, not by temporary agent instance.
+### 8.2 默认模式
 
-Preferred domain roots:
+#### 模式 A：情报 -> 研究 -> 归档
+
+适用于：
+
+- 趋势跟踪
+- 专题研究
+- 投资信号复核
+
+路由：
+
+`General Intelligence Agent` -> `AI Research Agent` 或 `Investment Agent` -> `Knowledge Agent`
+
+#### 模式 B：研究 -> 创作 -> 归档
+
+适用于：
+
+- 文章
+- 视频脚本
+- 面向公开的分析内容
+
+路由：
+
+`General Intelligence Agent` 或 `AI Research Agent` -> `Content Agent` -> `Knowledge Agent`
+
+#### 模式 C：研究 -> 构建 -> 归档
+
+适用于：
+
+- 工具
+- 实验
+- 自动化
+
+路由：
+
+`AI Research Agent` 或 `Knowledge Agent` -> `Coding Agent` -> `Knowledge Agent`
+
+#### 模式 D：会议 / 联系人 -> 跟进 -> 归档
+
+适用于：
+
+- 会议结果
+- 联系人管理
+- 协作进展
+
+路由：
+
+`Life Agent` 或 `Relationship and Collaboration Agent` -> `Relationship and Collaboration Agent` -> `Knowledge Agent`
+
+### 8.3 冲突解决
+
+如果多个 Agent 看起来都适合：
+
+1. 离最终产出最近的 Agent 拥有任务主责
+2. 执行高风险动作的 Agent 必须是最终执行 owner
+3. 归档 ownership 始终属于 `Knowledge Agent`
+4. 研究型 Agent 默认不能直接发布或对外发送
+
+---
+
+## 9. 工作区规则
+
+### 9.1 稳定工作区
+
+所有可长期保留的输出都必须存在于稳定工作区中。
+
+### 9.2 按领域存储
+
+按领域和内容类型存储，而不是按临时 Agent 实例存储。
+
+推荐的领域根目录：
 
 - `life`
 - `invest`
@@ -426,22 +426,22 @@ Preferred domain roots:
 - `shared`
 - `archive`
 
-### 9.3 File-First Storage
+### 9.3 文件优先存储
 
-Preferred durable formats:
+推荐的长期格式：
 
 - `md`
 - `json`
 - `yaml`
 - `csv`
-- source code files
-- standard media formats
+- 源代码文件
+- 标准媒体格式
 
-### 9.4 Metadata Is Required
+### 9.4 必须具备 Metadata
 
-Any durable document should include stable metadata.
+任何长期文档都应包含稳定 metadata。
 
-Minimum metadata:
+最低字段：
 
 - `id`
 - `title`
@@ -453,58 +453,58 @@ Minimum metadata:
 - `tags`
 - `visibility`
 
-### 9.5 Relative References Only
+### 9.5 只使用相对引用
 
-Internal references should use:
+内部引用应使用：
 
-- relative paths
-- logical IDs
+- 相对路径
+- 逻辑 ID
 
-Avoid hardcoded machine-specific absolute paths inside portable data.
+避免在可迁移数据中写死机器相关的绝对路径。
 
-### 9.6 Rebuildable Indexes
+### 9.6 索引必须可重建
 
-Search indexes, vector indexes, and caches must be rebuildable from files.
+搜索索引、向量索引和缓存都必须可以从文件重建。
 
 ---
 
-## 10. Memory Rules
+## 10. 记忆规则
 
-Memory must be split into two categories.
+记忆必须拆分为两类。
 
 ### 10.1 Fact Memory
 
-Stable data such as:
+稳定数据，例如：
 
-- user preferences
-- long-term goals
-- project context
-- contacts
-- rules
-- investment watchlists
+- 用户偏好
+- 长期目标
+- 项目上下文
+- 联系人
+- 规则
+- 投资观察列表
 
 ### 10.2 Working Memory
 
-Short-term data such as:
+短期数据，例如：
 
-- current task context
-- temporary plans
-- drafts
-- recent conversations
-- in-progress workflow state
+- 当前任务上下文
+- 临时计划
+- 草稿
+- 最近对话
+- 进行中的工作流状态
 
-Rule:
+规则：
 
-working memory may expire;
-fact memory should be explicitly managed.
+working memory 可以过期；  
+fact memory 应被显式管理。
 
 ---
 
-## 11. Tool Rules
+## 11. 工具规则
 
-### 11.1 Tools Are Registered Objects
+### 11.1 工具必须是已注册对象
 
-Every tool should have stable metadata:
+每个工具都应具备稳定 metadata：
 
 - `id`
 - `name`
@@ -516,77 +516,77 @@ Every tool should have stable metadata:
 - `version`
 - `status`
 
-### 11.2 Tools Are Not Agents
+### 11.2 工具不是 Agent
 
-Agents decide.
-Tools execute.
+Agent 负责判断。  
+Tool 负责执行。
 
-Never mix these roles conceptually.
+概念上绝不能混淆这两个角色。
 
-### 11.3 Tool Access Must Be Restricted
+### 11.3 工具访问必须受限
 
-Not every agent may use every tool.
+不是每个 Agent 都可以使用每个 Tool。
 
-Tool access should be limited by:
+工具访问应受以下因素限制：
 
-- domain
-- risk
-- workflow stage
-- explicit allowlists
-
----
-
-## 12. Approval Rules
-
-### 12.1 Low-Risk Actions
-
-Usually safe without explicit confirmation:
-
-- reading
-- summarizing
-- classifying
-- drafting
-
-### 12.2 Medium-Risk Actions
-
-May require policy-based approval:
-
-- writing internal files
-- changing knowledge organization
-- running scripts
-- editing structured configs
-
-### 12.3 High-Risk Actions
-
-Require explicit confirmation:
-
-- publishing
-- deleting
-- external sending
-- financial actions
-- credential changes
-- major system configuration changes
+- 领域
+- 风险等级
+- 工作流阶段
+- 明确 allowlist
 
 ---
 
-## 13. Portability Rules
+## 12. 审批规则
 
-This rule file must remain valid across different AI systems.
+### 12.1 低风险动作
 
-Therefore:
+通常无需显式确认：
 
-### 13.1 No Vendor Lock-In in Core Logic
+- 读取
+- 总结
+- 分类
+- 起草
 
-Core rules must not depend on:
+### 12.2 中风险动作
 
-- one model family
-- one chat UI
-- one vector database
-- one orchestration framework
+可以基于策略决定是否需要审批：
 
-### 13.2 Keep Semantics Stable
+- 写入内部文件
+- 修改知识组织
+- 运行脚本
+- 编辑结构化配置
 
-Even if names change across systems, the following meanings must stay stable:
+### 12.3 高风险动作
+
+必须显式确认：
+
+- 发布
+- 删除
+- 对外发送
+- 金融动作
+- 凭证变更
+- 重大系统配置变更
+
+---
+
+## 13. 可迁移性规则
+
+本规则文件必须能够跨不同 AI 系统保持有效。
+
+因此：
+
+### 13.1 核心逻辑不得锁定单一厂商
+
+核心规则不能依赖：
+
+- 单一模型家族
+- 单一聊天 UI
+- 单一向量数据库
+- 单一编排框架
+
+### 13.2 语义必须稳定
+
+即使不同系统中的名称发生变化，下列语义必须稳定：
 
 - core
 - agent
@@ -597,22 +597,22 @@ Even if names change across systems, the following meanings must stay stable:
 - archive
 - approval
 
-### 13.3 Prefer Plain Files and Plain Schemas
+### 13.3 优先使用纯文件和简单 schema
 
-Use portable formats wherever possible:
+尽可能使用可迁移格式：
 
 - Markdown
 - JSON
 - YAML
 - CSV
 
-### 13.4 Prompts Must Not Be the Only Specification
+### 13.4 Prompt 不能是唯一规格
 
-Important logic must exist in explicit documents and schemas, not only inside hidden prompts.
+重要逻辑必须存在于显式文档和 schema 中，不能只藏在隐藏 prompt 里。
 
-### 13.5 The System Must Survive Model Replacement
+### 13.5 系统必须能在模型替换后继续存活
 
-If the underlying model changes, the following should still remain usable:
+如果底层模型发生变化，以下内容仍必须可用：
 
 - workspace
 - files
@@ -623,42 +623,42 @@ If the underlying model changes, the following should still remain usable:
 
 ---
 
-## 14. What Must Never Happen
+## 14. 绝对不能发生的事情
 
-The following are system failures:
+以下情况属于系统失败：
 
-- one agent silently doing research, execution, and archival all at once
-- important knowledge existing only in chat history
-- file structure depending on one model provider
-- research agents directly executing high-risk external actions
-- multiple agents competing as task owner
-- durable assets stored only in unrecoverable indexes
-- external communication happening without traceability
-
----
-
-## 15. Minimal Portable Contract
-
-Any future jarvis implementation is acceptable if it preserves at least:
-
-1. one core orchestrator
-2. clear domain agents
-3. one-task-one-owner routing
-4. knowledge as final archive sink
-5. file-based durable workspace
-6. stable metadata
-7. explicit approval for high-risk actions
-8. rebuildable indexes and caches
-9. model-agnostic system semantics
+- 一个 Agent 静默地同时完成研究、执行和归档
+- 重要知识只存在于聊天记录中
+- 文件结构依赖某个模型厂商
+- 研究型 Agent 直接执行高风险外部动作
+- 多个 Agent 争夺任务 owner
+- 长期资产只保存在不可恢复的索引中
+- 对外沟通无法追溯
 
 ---
 
-## 16. Final Principle
+## 15. 最小可迁移契约
 
-`jarvis` should be treated as a long-lived personal system, not a temporary prompt setup.
+任何未来的 jarvis 实现，只要至少保留以下内容，就可以被接受：
 
-Models may change.
-Tools may change.
-Interfaces may change.
+1. 一个 Core orchestrator
+2. 清晰的领域 Agent
+3. one-task-one-owner 路由
+4. 知识层作为最终归档收口
+5. 基于文件的长期工作区
+6. 稳定 metadata
+7. 高风险动作显式审批
+8. 可重建的索引与缓存
+9. 与模型无关的系统语义
 
-The rules, workspace, and durable knowledge should remain.
+---
+
+## 16. 最终原则
+
+`jarvis` 应被视为一个长期存在的个人系统，而不是一次性的 prompt 搭建。
+
+模型会变化。  
+工具会变化。  
+界面会变化。
+
+但规则、工作区和长期知识应保持不变。
