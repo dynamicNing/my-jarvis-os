@@ -6,8 +6,7 @@
 
 ## 这个仓库包含什么
 
-- [`rule.md`](./rule.md)：jarvis 的稳定规则层，定义系统不变量与架构边界
-- [`jarvis-Constitution.md`](./jarvis-Constitution.md)：更精炼的宪章版本，适合快速对齐共识
+- [`jarvis-Constitution.md`](./jarvis-Constitution.md)：系统宪章，定义核心规则、架构边界和 Agent 职责
 - [`jarvis-12条铁律.md`](./jarvis-12%E6%9D%A1%E9%93%81%E5%BE%8B.md)：最核心的 12 条约束，可作为高层原则速览
 - [`jarvis-工作区目录与Metadata规范.md`](./jarvis-%E5%B7%A5%E4%BD%9C%E5%8C%BA%E7%9B%AE%E5%BD%95%E4%B8%8EMetadata%E8%A7%84%E8%8C%83.md)：文件落盘、目录结构、命名与 metadata 规范
 - [`jarvis-个人Agent规划.md`](./jarvis-%E4%B8%AA%E4%BA%BAAgent%E8%A7%84%E5%88%92.md)：核心 Agent 角色划分、能力域与协作方式

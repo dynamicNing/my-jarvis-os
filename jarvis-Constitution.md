@@ -28,6 +28,23 @@ It may optionally manage relationships and collaboration.
 6. High-risk actions require explicit confirmation or an explicit permission rule.
 7. The system must remain portable across models, frameworks, and interfaces.
 
+**Clarification on Rule 4 - Knowledge Agent Scope:**
+
+The Knowledge Agent acts as the final archive sink, but not all outputs require its direct involvement:
+
+**Must route through Knowledge Agent:**
+- Cross-domain materials requiring unified tagging
+- Materials needing entity relationships established
+- Materials requiring knowledge graph integration
+- Final versions of important research or content
+
+**Can write directly to domain directories:**
+- Single-domain daily outputs (e.g., scripts, drafts, meeting notes)
+- Temporary or intermediate artifacts
+- Work-in-progress materials
+
+The Knowledge Agent performs "post-organization" rather than "pre-approval" for routine outputs.
+
 ---
 
 ## 3. Stable Layers
@@ -107,7 +124,74 @@ It never sends sensitive external communication without confirmation.
 
 ---
 
-## 6. Routing Rules
+## 6. Task Definition and Granularity
+
+### 6.1 Task Types
+
+**Atomic Task**
+A minimal unit that can be completed independently by a single agent.
+
+Examples:
+- "Summarize this article"
+- "Generate a script to parse RSS feeds"
+- "Draft an outline for AI agents topic"
+
+**Composite Task**
+A complex task requiring collaboration across multiple agents.
+
+Examples:
+- "Research Nvidia and write an article"
+- "Analyze market trends and update investment thesis"
+- "Build a tool based on latest AI research"
+
+### 6.2 Routing for Composite Tasks
+
+When facing a composite task:
+
+1. **Decompose** into atomic tasks
+2. **Sequence** the atomic tasks
+3. **Assign** primary agent for each atomic task
+4. **Designate** the final atomic task's agent as overall primary owner
+
+Example decomposition:
+
+```
+User: "Research Nvidia and write an article"
+
+Decomposition:
+  Task 1: Research Nvidia supply chain signals
+    Primary: AI Research Agent or Investment Agent
+    Output: Research notes
+  
+  Task 2: Draft article based on research
+    Primary: Content Agent
+    Input: Research notes from Task 1
+    Output: Article draft
+  
+  Task 3: Archive research and article
+    Primary: Knowledge Agent
+    Input: All outputs from Task 1 & 2
+
+Overall Primary: Content Agent (closest to final output)
+```
+
+### 6.3 Task Boundary Judgment
+
+When unclear whether to treat as one task or multiple:
+
+**Treat as ONE atomic task if:**
+- Can be completed in a single agent session
+- No handoff of intermediate artifacts needed
+- Output is a single coherent deliverable
+
+**Treat as MULTIPLE atomic tasks if:**
+- Requires distinct expertise from different agents
+- Intermediate outputs need review or approval
+- Different risk levels across stages
+
+---
+
+## 7. Routing Rules
 
 For every task:
 
@@ -132,7 +216,7 @@ Conflict resolution:
 
 ---
 
-## 7. Workspace Rules
+## 8. Workspace Rules
 
 1. Durable outputs must live in a stable workspace.
 2. Storage should be domain-based, not temporary-agent-based.
@@ -141,17 +225,20 @@ Conflict resolution:
 5. Internal references should use relative paths or logical IDs.
 6. Indexes and caches must be rebuildable from files.
 
-Minimum metadata:
+Minimum metadata (required):
 
-- `id`
-- `title`
-- `created_at`
-- `updated_at`
-- `domain`
-- `type`
-- `status`
-- `tags`
-- `visibility`
+- `id` (auto-generated)
+- `created_at` (auto-generated)
+- `domain` (must specify)
+
+Recommended metadata (with defaults):
+
+- `title` (inferred from content)
+- `updated_at` (defaults to created_at)
+- `type` (defaults to "note")
+- `status` (defaults to "draft")
+- `tags` (defaults to empty array)
+- `visibility` (defaults to "private")
 
 ---
 

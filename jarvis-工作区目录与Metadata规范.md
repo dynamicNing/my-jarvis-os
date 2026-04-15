@@ -362,62 +362,73 @@ metadata.schema.yaml
 
 ### 9.2 必填字段
 
+为了降低实施难度，只保留真正必需的字段作为必填项：
+
 ```yaml
-id:
-title:
-created_at:
-updated_at:
-domain:
-type:
-status:
-tags:
-visibility:
+id:           # 全局唯一文档 ID，系统自动生成
+created_at:   # 创建时间，系统自动生成
+domain:       # 资料所属领域，必须明确指定
 ```
 
 ### 9.3 推荐字段
 
+以下字段强烈推荐填写，系统可提供默认值或自动推断：
+
 ```yaml
-agent:
-workflow:
-source_type:
-source_url:
-authors:
-entities:
-related:
-review_at:
-language:
-summary:
+title:        # 文档标题，可从内容首行推断
+updated_at:   # 更新时间，默认等于 created_at
+type:         # 资料类型，可有默认值（如 note）
+status:       # 当前状态，默认为 draft
+tags:         # 标签数组，可为空数组 []
+visibility:   # 可见性，默认为 private
 ```
 
-### 9.4 字段定义
+### 9.4 可选字段
 
-| 字段 | 类型 | 是否必填 | 说明 |
-|---|---|---|---|
-| `id` | string | 是 | 全局唯一文档 ID |
-| `title` | string | 是 | 文档标题 |
-| `created_at` | date or datetime | 是 | 创建时间 |
-| `updated_at` | date or datetime | 是 | 更新时间 |
-| `domain` | enum | 是 | 资料所属领域 |
-| `type` | string | 是 | 资料类型 |
-| `status` | enum | 是 | 当前状态 |
-| `tags` | string[] | 是 | 标签数组 |
-| `visibility` | enum | 是 | 可见性 |
-| `agent` | string | 否 | 生成或维护该文档的 Agent |
-| `workflow` | string | 否 | 来源 Workflow ID |
-| `source_type` | enum | 否 | 来源类型 |
-| `source_url` | string | 否 | 外部来源链接 |
-| `authors` | string[] | 否 | 作者或整理者 |
-| `entities` | string[] | 否 | 关联实体 ID |
-| `related` | string[] | 否 | 相关文档 ID |
-| `review_at` | date | 否 | 复查日期 |
-| `language` | string | 否 | 语言 |
-| `summary` | string | 否 | 简介摘要 |
+以下字段按需填写，用于增强检索和关系管理：
+
+```yaml
+agent:        # 生成或维护该文档的 Agent
+workflow:     # 来源 Workflow ID
+source_type:  # 来源类型
+source_url:   # 外部来源链接
+authors:      # 作者或整理者
+entities:     # 关联实体 ID
+related:      # 相关文档 ID
+review_at:    # 复查日期
+language:     # 语言
+summary:      # 简介摘要
+```
+
+### 9.5 字段定义
+
+| 字段 | 类型 | 是否必填 | 默认值 | 说明 |
+|---|---|---|---|---|
+| `id` | string | 是 | 自动生成 | 全局唯一文档 ID，格式：`<type>-<topic>-<date>-<seq>` |
+| `created_at` | date or datetime | 是 | 自动生成 | 创建时间，ISO 8601 格式 |
+| `domain` | enum | 是 | 无 | 资料所属领域，见枚举值 |
+| `title` | string | 推荐 | 从内容推断 | 文档标题 |
+| `updated_at` | date or datetime | 推荐 | = created_at | 更新时间 |
+| `type` | string | 推荐 | `note` | 资料类型，如 note, research, draft, script 等 |
+| `status` | enum | 推荐 | `draft` | 当前状态，见枚举值 |
+| `tags` | string[] | 推荐 | `[]` | 标签数组 |
+| `visibility` | enum | 推荐 | `private` | 可见性，见枚举值 |
+| `agent` | string | 可选 | 无 | 生成或维护该文档的 Agent |
+| `workflow` | string | 可选 | 无 | 来源 Workflow ID |
+| `source_type` | enum | 可选 | 无 | 来源类型，见枚举值 |
+| `source_url` | string | 可选 | 无 | 外部来源链接 |
+| `authors` | string[] | 可选 | 无 | 作者或整理者 |
+| `entities` | string[] | 可选 | 无 | 关联实体 ID |
+| `related` | string[] | 可选 | 无 | 相关文档 ID |
+| `review_at` | date | 可选 | 无 | 复查日期 |
+| `language` | string | 可选 | 无 | 语言代码，如 zh, en |
+| `summary` | string | 可选 | 无 | 简介摘要 |
 
 ### 9.5 枚举建议
 
 #### `domain`
 
-允许值建议：
+允许值：
 
 - `life`
 - `invest`
@@ -428,48 +439,97 @@ summary:
 - `shared`
 - `system`
 
+#### `type`
+
+常见类型建议（可扩展）：
+
+- `note` - 笔记
+- `research` - 研究报告
+- `digest` - 摘要
+- `draft` - 草稿
+- `article` - 文章
+- `script` - 脚本
+- `tool` - 工具
+- `spec` - 规格说明
+- `meeting-note` - 会议记录
+- `journal` - 日志
+- `task` - 任务
+- `contact` - 联系人
+- `entity` - 实体
+
 #### `status`
 
-允许值建议：
+允许值：
 
-- `inbox`
-- `draft`
-- `active`
-- `reviewed`
-- `published`
-- `archived`
-- `deprecated`
+- `inbox` - 待整理
+- `draft` - 草稿
+- `active` - 活跃
+- `reviewed` - 已复核
+- `published` - 已发布
+- `archived` - 已归档
+- `deprecated` - 已废弃
 
 #### `visibility`
 
-允许值建议：
+允许值：
 
-- `private`
-- `internal`
-- `public`
+- `private` - 私有
+- `internal` - 内部
+- `public` - 公开
 
 #### `source_type`
 
-允许值建议：
+允许值：
 
-- `manual`
-- `web`
-- `email`
-- `meeting`
-- `market`
-- `agent-generated`
-- `workflow-generated`
-- `imported`
+- `manual` - 手动创建
+- `web` - 网页来源
+- `email` - 邮件来源
+- `meeting` - 会议来源
+- `market` - 市场数据
+- `agent-generated` - Agent 生成
+- `workflow-generated` - 工作流生成
+- `imported` - 导入
 
 ### 9.6 标准 frontmatter 示例
+
+**最小示例（仅必填字段）：**
 
 ```md
 ---
 id: research-nvidia-supply-chain-2026-04-13-001
-title: Nvidia Supply Chain Notes
 created_at: 2026-04-13
-updated_at: 2026-04-13
 domain: invest
+---
+```
+
+**推荐示例（必填 + 推荐字段）：**
+
+```md
+---
+id: research-nvidia-supply-chain-2026-04-13-001
+created_at: 2026-04-13
+domain: invest
+title: Nvidia Supply Chain Notes
+updated_at: 2026-04-13
+type: research-note
+status: draft
+tags:
+  - invest
+  - semis
+  - nvidia
+visibility: private
+---
+```
+
+**完整示例（包含可选字段）：**
+
+```md
+---
+id: research-nvidia-supply-chain-2026-04-13-001
+created_at: 2026-04-13
+domain: invest
+title: Nvidia Supply Chain Notes
+updated_at: 2026-04-13
 type: research-note
 status: draft
 tags:
