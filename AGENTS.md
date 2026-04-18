@@ -2,9 +2,15 @@
 
 ## 项目结构与模块组织
 
-当前仓库以规范文档为主，核心内容位于根目录 Markdown 文件，例如 `rule.md`、`jarvis-Constitution.md`、`jarvis-工作区目录与Metadata规范.md`。这些文件是架构、工作区布局和运行规则的权威来源。
+仓库已按 agent 设计分层：
 
-后续若补充运行时内容，应遵循 `jarvis-工作区目录与Metadata规范.md` 中定义的工作区模型，例如 `00-system/`、`01-inbox/`、`20-invest/`、`30-intel/`、`40-knowledge/`、`50-dev/`、`60-content/`。长期资料进入对应领域目录，不要创建临时且无语义的散乱目录。
+- `docs/` — 设计规范（`constitution.md`、`iron-rules.md`、`agent-plan.md`、`workspace-metadata-spec.md`、`workspace-gui-plan.md`）
+- `core/` — 跨 agent 的系统能力（routing/memory/permissions/workflows/audit）
+- `agents/` — 每个 agent 一个子目录，含 README/prompt/tools/schemas/src/tests，`agents/_template/` 是新 agent 脚手架
+- `tools/` — 共享工具注册表
+- `workspace/` — 运行时数据，子目录遵循 `docs/workspace-metadata-spec.md`（`00-system/`、`01-inbox/`、`10-life/`、`20-invest/`、`30-intel/`、`40-knowledge/`、`50-dev/`、`60-content/`、`70-shared/`、`90-archive/`）
+
+后续运行时内容必须落到对应领域目录，不要在根目录创建临时且无语义的散乱目录。
 
 ## 构建、测试与开发命令
 

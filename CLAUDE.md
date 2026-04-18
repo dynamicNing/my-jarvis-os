@@ -192,11 +192,11 @@ Working memory may expire. Fact memory must be explicitly managed.
 
 ### Recommended Reading Order
 
-1. `jarvis-12条铁律.md` - Understand the hardest system constraints
-2. `jarvis-Constitution.md` - Establish overall structure and role boundaries
-3. `jarvis-工作区目录与Metadata规范.md` - Understand file storage, naming, and archival
-4. `jarvis-个人Agent规划.md` - Understand agent responsibilities and collaboration
-5. `jarvis-Workspace-GUI规划.md` - Understand visualization workspace design
+1. `docs/iron-rules.md` - Understand the hardest system constraints
+2. `docs/constitution.md` - Establish overall structure and role boundaries
+3. `docs/workspace-metadata-spec.md` - Understand file storage, naming, and archival
+4. `docs/agent-plan.md` - Understand agent responsibilities and collaboration
+5. `docs/workspace-gui-plan.md` - Understand visualization workspace design
 
 ### File Verification Commands
 
